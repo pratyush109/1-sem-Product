@@ -14,7 +14,7 @@ class SupplierClass:
         self.create_widgets()
 
     def create_database(self):
-        # Connect to SQLite database (or create one if it doesn't exist)
+        
         self.conn = sqlite3.connect("supplier.db")
         self.cursor = self.conn.cursor()
         
@@ -107,7 +107,7 @@ class SupplierClass:
             messagebox.showerror("Error", "All fields are required!")
             return
         
-        # Insert supplier into the database
+        
         self.cursor.execute("INSERT INTO suppliers (invoice, name, contact, description) VALUES (?, ?, ?, ?)",
                             (invoice, name, contact, description))
         self.conn.commit()
@@ -125,7 +125,6 @@ class SupplierClass:
             messagebox.showerror("Error", "All fields are required!")
             return
         
-        # Update supplier in the database
         self.cursor.execute("UPDATE suppliers SET name=?, contact=?, description=? WHERE invoice=?",
                             (name, contact, description, invoice))
         self.conn.commit()
@@ -139,8 +138,7 @@ class SupplierClass:
         if invoice == '':
             messagebox.showerror("Error", "Invoice number is required!")
             return
-        
-        # Delete supplier from the database
+       
         self.cursor.execute("DELETE FROM suppliers WHERE invoice=?", (invoice,))
         self.conn.commit()
         messagebox.showinfo("Success", "Supplier deleted successfully!")
@@ -154,7 +152,7 @@ class SupplierClass:
             messagebox.showerror("Error", "Invoice number is required!")
             return
         
-        # Search supplier in the database
+      
         self.cursor.execute("SELECT * FROM suppliers WHERE invoice=?", (invoice,))
         result = self.cursor.fetchone()
         
@@ -168,15 +166,15 @@ class SupplierClass:
             messagebox.showerror("Error", "Supplier not found!")
 
     def show_all_suppliers(self):
-        # Fetch all suppliers from the database
+       
         self.cursor.execute("SELECT * FROM suppliers")
         rows = self.cursor.fetchall()
         
-        # Clear the existing data in the treeview
+       
         for row in self.treeview.get_children():
             self.treeview.delete(row)
         
-        # Populate the treeview with the data from the database
+        
         for row in rows:
             self.treeview.insert('', END, values=row)
 
