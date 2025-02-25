@@ -112,7 +112,7 @@ class employeeClass:
         btn_Clear.place(x=585, y=350, width=150, height=40)
 
         emp_frame = Frame(self.root, bd=3, relief=RIDGE)
-        emp_frame.place(x=0, y=400, relwidth=1, height=250) 
+        emp_frame.place(x=0, y=400, relwidth=1, height=250)  # Move frame down so buttons are above
 
         scrolly = Scrollbar(emp_frame, orient=VERTICAL)
         scrollx = Scrollbar(emp_frame, orient=HORIZONTAL)
@@ -144,7 +144,7 @@ class employeeClass:
         self.EmployeeTable.column("address", width=100)
         self.EmployeeTable.column("salary", width=200)
 
-       
+        # Packing the scrollbars and table correctly
         scrollx.pack(side=BOTTOM, fill=X)
         scrolly.pack(side=RIGHT, fill=Y)
         self.EmployeeTable.pack(fill=BOTH, expand=1)
@@ -209,7 +209,7 @@ class employeeClass:
             messagebox.showinfo("No Data", "No matching records found", parent=self.root)
         else:
             for row in rows:
-                print(row)  
+                print(row)  # You can populate the treeview here if needed
 
         con.close()
 
